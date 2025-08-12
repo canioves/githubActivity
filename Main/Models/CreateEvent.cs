@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Main.Models
 {
-    public class CreateEvent
+    public class CreateEvent : IEvent
     {
-        
+        public string Type => "CreateEvent";
+        public string RepoName { get; set; }
+
+        public string PrintMessage()
+        {
+            return $"Created new repository: {RepoName}";
+        }
     }
 }

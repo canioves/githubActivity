@@ -18,8 +18,6 @@ class Program
         string username = Console.ReadLine();
 
         IClient client = new GithubClient(appSettings);
-        string json = await client.GetUserEventsJsonAsync(username);
-
-        Console.WriteLine(json);
+        
     }
 }
