@@ -29,6 +29,7 @@ namespace Main.Services
 
                     List<Commit> commits = [];
 
+                    // TODO: trace bugs with deserialization
                     foreach (CommitDTO commitDto in pushEventDto.Payload.Commits)
                     {
                         Commit commit = new Commit

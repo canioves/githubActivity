@@ -7,9 +7,9 @@ namespace Main.Services
 {
     public class GithubService
     {
-        private GithubClient _client;
+        private IClient _client;
 
-        public GithubService(GithubClient client)
+        public GithubService(IClient client)
         {
             _client = client;
         }
