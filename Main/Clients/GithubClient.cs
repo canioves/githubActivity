@@ -41,10 +41,16 @@ namespace Main.Clients
 
             foreach (JsonElement element in root.EnumerateArray())
             {
-                BaseEventDTO eventDto = JsonSerializer.Deserialize<BaseEventDTO>(
-                    element,
-                    _jsonOptions
-                );
+                string type = element.GetProperty("type").GetString();
+                BaseEventDTO eventDto = type switch
+                {
+                    "PushEvent" => JsonSerializer.Deserialize<PushEventDTO>(element, _jsonOptions),
+                    "CreateEvent" => JsonSerializer.Deserialize<CreateEventDTO>(
+                        element,
+                        _jsonOptions
+                    ),
+                    _ => throw new NotSupportedException($"Unknown type of event: {type}"),
+                };
                 baseDtos.Add(eventDto);
             }
             return baseDtos;
