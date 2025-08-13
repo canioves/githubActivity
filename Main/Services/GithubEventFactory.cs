@@ -1,21 +1,23 @@
 using System.Text.Json;
-using System.Text.Json.Nodes;
 using Main.DTOs;
 using Main.DTOs.Events;
-using Main.DTOs.Payloads;
 using Main.Models;
+using Main.Utils;
 
 namespace Main.Services
 {
     public static class GithubEventFactory
     {
+        private static readonly JsonSerializerOptions _settings = JsonSettings.Default;
+
         public static IEvent CreateEvent(string type, string json)
         {
             switch (type)
             {
                 case "CreateEvent":
                     CreateEventDTO createEventDto = JsonSerializer.Deserialize<CreateEventDTO>(
-                        json
+                        json,
+                        _settings
                     );
 
                     CreateEvent createEvent = new CreateEvent
@@ -25,7 +27,10 @@ namespace Main.Services
                     return createEvent;
 
                 case "PushEvent":
-                    PushEventDTO pushEventDto = JsonSerializer.Deserialize<PushEventDTO>(json);
+                    PushEventDTO pushEventDto = JsonSerializer.Deserialize<PushEventDTO>(
+                        json,
+                        _settings
+                    );
 
                     List<Commit> commits = [];
 
