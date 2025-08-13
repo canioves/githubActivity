@@ -11,7 +11,7 @@ namespace Main.Models
         public string PrintMessage()
         {
             int commitCount = Commits.Count;
-            string message = $"Pushed {commitCount} commits to {RepoName}:";
+            string message = $"Pushed {commitCount} commits to {RepoName}:\n";
             StringBuilder sb = new(message);
 
             foreach (Commit commit in Commits)

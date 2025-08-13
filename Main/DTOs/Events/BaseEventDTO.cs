@@ -5,7 +5,7 @@ namespace Main.DTOs.Events
     public abstract class BaseEventDTO
     {
         [JsonPropertyName("id")]
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         [JsonPropertyName("type")]
         public string Type { get; set; }
