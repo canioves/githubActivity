@@ -1,9 +1,9 @@
-using Main.Models;
+using Main.DTOs.Events;
 
 namespace Main.Clients
 {
     public interface IClient
     {
-        Task<string> GetEventsRawJsonAsync(string username);
+        Task<List<BaseEventDTO>> GetBaseEventDTOs(string username);
     }
 }

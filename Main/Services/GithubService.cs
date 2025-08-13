@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Main.Clients;
 using Main.DTOs.Events;
 using Main.Models;
@@ -16,20 +15,8 @@ namespace Main.Services
 
         public async Task<IEnumerable<IEvent>> GetEventsAsync(string username)
         {
-            string json = await _client.GetEventsRawJsonAsync(username);
-            List<IEvent> events = [];
-
-            using JsonDocument doc = JsonDocument.Parse(json);
-            JsonElement root = doc.RootElement;
-
-            foreach (JsonElement jsonEvent in root.EnumerateArray())
-            {
-                string eventType = jsonEvent.GetProperty("type").GetString();
-                string eventRawJson = jsonEvent.GetRawText();
-
-                IEvent eventModel = GithubEventFactory.CreateEvent(eventType, eventRawJson);
-                events.Add(eventModel);
-            }
+            List<BaseEventDTO> dtos = await _client.GetBaseEventDTOs(username);
+            IEnumerable<IEvent> events = dtos.Select(GithubEventFactory.Create);
             return events;
         }
     }

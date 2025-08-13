@@ -1,7 +1,12 @@
+using System.Text.Json;
+using Main.DTOs.Events;
+using Main.Utils;
+
 namespace Main.Clients
 {
     public class GithubClient : IClient
     {
+        private static readonly JsonSerializerOptions _jsonOptions = JsonSettings.Default;
         private readonly HttpClient _httpClient;
         private readonly AppSettings _settings;
 
@@ -13,7 +18,7 @@ namespace Main.Clients
             _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("GithubActivityApp/1.0");
         }
 
-        public async Task<string> GetEventsRawJsonAsync(string username)
+        private async Task<string> GetEventsJsonAsync(string username)
         {
             string url = $"/users/{username}/events";
             HttpResponseMessage response = await _httpClient.GetAsync(url);
@@ -23,6 +28,26 @@ namespace Main.Clients
             string json = await response.Content.ReadAsStringAsync();
 
             return json;
+        }
+
+        public async Task<List<BaseEventDTO>> GetBaseEventDTOs(string username)
+        {
+            string json = await GetEventsJsonAsync(username);
+
+            JsonDocument doc = JsonDocument.Parse(json);
+            JsonElement root = doc.RootElement;
+
+            List<BaseEventDTO> baseDtos = [];
+
+            foreach (JsonElement element in root.EnumerateArray())
+            {
+                BaseEventDTO eventDto = JsonSerializer.Deserialize<BaseEventDTO>(
+                    element,
+                    _jsonOptions
+                );
+                baseDtos.Add(eventDto);
+            }
+            return baseDtos;
         }
     }
 }
