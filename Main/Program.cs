@@ -18,6 +18,5 @@ class Program
         string username = Console.ReadLine();
 
         IClient client = new GithubClient(appSettings);
-        
     }
 }

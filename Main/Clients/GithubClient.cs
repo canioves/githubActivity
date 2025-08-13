@@ -13,7 +13,7 @@ namespace Main.Clients
             _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("GithubActivityApp/1.0");
         }
 
-        public async Task<string> GetUserEventsJsonAsync(string username)
+        public async Task<string> GetEventsRawJsonAsync(string username)
         {
             string url = $"/users/{username}/events";
             HttpResponseMessage response = await _httpClient.GetAsync(url);

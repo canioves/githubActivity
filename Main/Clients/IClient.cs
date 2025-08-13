@@ -4,6 +4,6 @@ namespace Main.Clients
 {
     public interface IClient
     {
-        Task<string> GetUserEventsJsonAsync(string username);
+        Task<string> GetEventsRawJsonAsync(string username);
     }
 }
