@@ -2,6 +2,7 @@ using System.Text.Json;
 using Main.DTOs;
 using Main.DTOs.Events;
 using Main.Models;
+using Main.Models.Abstract;
 using Main.Utils;
 
 namespace Main.Services
@@ -10,9 +11,9 @@ namespace Main.Services
     {
         private static readonly JsonSerializerOptions _settings = JsonSettings.Default;
 
-        public static IEvent CreateEvent(string type, string json)
+        public static IEvent Create(BaseEventDTO baseDto, string json)
         {
-            switch (type)
+            switch (baseDto.Type)
             {
                 case "CreateEvent":
                     CreateEventDTO createEventDto = JsonSerializer.Deserialize<CreateEventDTO>(
@@ -20,10 +21,7 @@ namespace Main.Services
                         _settings
                     );
 
-                    CreateEvent createEvent = new CreateEvent
-                    {
-                        RepoName = createEventDto.Repo.Name,
-                    };
+                    IEvent createEvent = CreateEventFactory.Create(createEventDto);
                     return createEvent;
 
                 case "PushEvent":
@@ -34,7 +32,6 @@ namespace Main.Services
 
                     List<Commit> commits = [];
 
-                    // TODO: trace bugs with deserialization
                     foreach (CommitDTO commitDto in pushEventDto.Payload.Commits)
                     {
                         Commit commit = new Commit
