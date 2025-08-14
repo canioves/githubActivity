@@ -1,5 +1,6 @@
 # GitHub Activity Viewer
 
+[Project from roadmap.sh.](https://roadmap.sh/projects/github-user-activity)  
 A C# console application that fetches and displays recent GitHub user activities in a readable format.
 
 ## Features
