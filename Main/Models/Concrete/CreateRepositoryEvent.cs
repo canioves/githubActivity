@@ -6,9 +6,6 @@ namespace Main.Models
     {
         public string CreateType => "Repository";
 
-        public override string PrintMessage()
-        {
-            return $"Created new repository: {RepoName}";
-        }
+        public override string Accept(IEventVisitor visitor) => visitor.Visit(this);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Main.Clients;
 using Main.Models;
+using Main.Models.Abstract;
 using Main.Services;
+using Main.Services.Formatters;
 using Microsoft.Extensions.Configuration;
 
 namespace Main;
@@ -20,13 +22,14 @@ class Program
         string username = Console.ReadLine();
 
         IClient client = new GithubClient(appSettings);
-        GithubService service = new GithubService(client);
+        IEventVisitor formatter = new EventFormatter();
+        GithubService service = new GithubService(client, formatter);
 
         IEnumerable<IEvent> events = await service.GetEventsAsync(username);
-
-        foreach (IEvent @event in events)
+        IEnumerable<string> eventsText = service.GetEventsText(events);
+        foreach (string text in eventsText)
         {
-            Console.WriteLine(@event.PrintMessage());
+            Console.WriteLine(text);
         }
     }
 }

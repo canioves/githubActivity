@@ -6,9 +6,6 @@ namespace Main.Models.Concrete
     {
         public string CreateType => "Branch";
 
-        public override string PrintMessage()
-        {
-            return $"Created new branch {Ref} in {RepoName}";
-        }
+        public override string Accept(IEventVisitor visitor) => visitor.Visit(this);
     }
 }
