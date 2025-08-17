@@ -27,3 +27,8 @@ dotnet run --project Main/Main.csproj
 ```
 
 Enter a GitHub username when prompted to see their recent activity.
+
+### TODO:
+1. Add all github events
+2. Add tests
+3. Add error handling
