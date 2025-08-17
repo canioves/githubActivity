@@ -22,14 +22,21 @@ class Program
         string username = Console.ReadLine();
 
         IClient client = new GithubClient(appSettings);
-        IEventVisitor formatter = new EventFormatter();
+        IEventVisitor formatter = new MainEventFormater();
         GithubService service = new GithubService(client, formatter);
 
-        IEnumerable<IEvent> events = await service.GetEventsAsync(username);
-        IEnumerable<string> eventsText = service.GetEventsText(events);
-        foreach (string text in eventsText)
+        try
         {
-            Console.WriteLine(text);
+            IEnumerable<IEvent> events = await service.GetEventsAsync(username);
+            IEnumerable<string> eventsText = service.GetEventsText(events);
+            foreach (string text in eventsText)
+            {
+                Console.WriteLine(text);
+            }
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex.Message);
         }
     }
 }

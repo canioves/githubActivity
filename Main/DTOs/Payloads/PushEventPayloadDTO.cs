@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Main.DTOs.Payloads
 {
-    public class PushPayloadDTO
+    public class PushEventPayloadDTO
     {
         [JsonPropertyName("repository_id")]
         public long RepositoryId { get; set; }

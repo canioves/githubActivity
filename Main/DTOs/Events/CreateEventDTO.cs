@@ -6,6 +6,6 @@ namespace Main.DTOs.Events
     public class CreateEventDTO : BaseEventDTO
     {
         [JsonPropertyName("payload")]
-        public CreatePayloadDTO Payload { get; set; }
+        public CreateEventPayloadDTO Payload { get; set; }
     }
 }

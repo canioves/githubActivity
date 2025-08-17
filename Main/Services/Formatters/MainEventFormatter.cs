@@ -4,7 +4,7 @@ using Main.Models.Concrete;
 
 namespace Main.Services.Formatters
 {
-    public class EventFormatter : IEventVisitor
+    public class MainEventFormater : IEventVisitor
     {
         private readonly CreateEventFormatter _createFormater = new CreateEventFormatter();
         private readonly PushEventFormatter _pushFormater = new PushEventFormatter();

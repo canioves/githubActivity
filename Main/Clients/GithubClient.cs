@@ -49,7 +49,7 @@ namespace Main.Clients
                         element,
                         _jsonOptions
                     ),
-                    _ => throw new NotSupportedException($"Unknown type of event: {type}"),
+                    _ => throw new ArgumentException($"Unknown type of event: {type}"),
                 };
                 baseDtos.Add(eventDto);
             }

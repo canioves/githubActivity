@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Main.DTOs.Payloads
 {
-    public class CreatePayloadDTO
+    public class CreateEventPayloadDTO
     {
         [JsonPropertyName("ref")]
         public string Ref { get; set; }
