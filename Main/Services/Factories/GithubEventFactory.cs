@@ -1,8 +1,6 @@
-using System.Text.Json;
-using Main.DTOs;
 using Main.DTOs.Events;
 using Main.Models;
-using Main.Utils;
+using Main.Models.Concrete;
 
 namespace Main.Services
 {
@@ -26,6 +24,14 @@ namespace Main.Services
                     ],
                 },
                 CreateEventDTO createDto => CreateEventFactory.Create(createDto),
+                IssueCommentEventDTO issueCommentDto => new IssueCommentEvent
+                {
+                    ActionType = issueCommentDto.Payload.Action,
+                    IssueBody = issueCommentDto.Payload.Issue.Body,
+                    IssueState = issueCommentDto.Payload.Issue.State,
+                    IssueTitle = issueCommentDto.Payload.Issue.Title,
+                    RepoName = issueCommentDto.Repo.Name,
+                },
                 _ => throw new NotSupportedException("Unknown type of event"),
             };
         }

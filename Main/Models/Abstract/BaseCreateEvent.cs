@@ -1,10 +1,12 @@
+using Main.Models.Concrete;
+
 namespace Main.Models.Abstract
 {
     public abstract class BaseCreateEvent : IEvent
     {
         public string Type => "CreateEvent";
-        public string Ref { get; set; }
-        public string RefType { get; set; }
+        public string BranchName { get; set; }
+        public string SubType { get; set; }
         public string RepoName { get; set; }
         public List<Commit> Commits { get; set; }
 

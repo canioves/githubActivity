@@ -1,4 +1,4 @@
-namespace Main.Models
+namespace Main.Models.Concrete
 {
     public class Commit
     {

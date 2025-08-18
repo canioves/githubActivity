@@ -49,6 +49,10 @@ namespace Main.Clients
                         element,
                         _jsonOptions
                     ),
+                    "IssueCommentEvent" => JsonSerializer.Deserialize<IssueCommentEventDTO>(
+                        element,
+                        _jsonOptions
+                    ),
                     _ => throw new ArgumentException($"Unknown type of event: {type}"),
                 };
                 baseDtos.Add(eventDto);

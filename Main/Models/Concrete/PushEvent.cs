@@ -1,6 +1,6 @@
 using Main.Models.Abstract;
 
-namespace Main.Models
+namespace Main.Models.Concrete
 {
     public class PushEvent : IEvent
     {

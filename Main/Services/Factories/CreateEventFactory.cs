@@ -15,7 +15,7 @@ namespace Main.Services
                     CreateRepositoryEvent repositoryEvent = new CreateRepositoryEvent
                     {
                         RepoName = dto.Repo.Name,
-                        RefType = dto.Payload.RefType,
+                        SubType = dto.Payload.RefType,
                     };
                     return repositoryEvent;
 
@@ -23,8 +23,8 @@ namespace Main.Services
                     CreateBranchEvent branchEvent = new CreateBranchEvent
                     {
                         RepoName = dto.Repo.Name,
-                        Ref = dto.Payload.Ref,
-                        RefType = dto.Payload.RefType,
+                        BranchName = dto.Payload.Ref,
+                        SubType = dto.Payload.RefType,
                     };
                     return branchEvent;
                 default:

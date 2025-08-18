@@ -1,4 +1,3 @@
-using Main.Models;
 using Main.Models.Abstract;
 using Main.Models.Concrete;
 
@@ -16,5 +15,10 @@ namespace Main.Services.Formatters
 
         public string Visit(CreateRepositoryEvent createRepositoryEvent) =>
             _createFormater.Format(createRepositoryEvent);
+
+        public string Visit(IssueCommentEvent issueCommentEvent)
+        {
+            return $"Issue \"{issueCommentEvent.IssueTitle}\" was {issueCommentEvent.ActionType}.\nBody: {issueCommentEvent.IssueBody}\nCurrent state - {issueCommentEvent.IssueState}";
+        }
     }
 }

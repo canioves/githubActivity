@@ -12,7 +12,7 @@ namespace Main.Services.Formatters
             _subFormatters = new Dictionary<string, Func<BaseCreateEvent, string>>
             {
                 { "repository", x => $"Created new repo {x.RepoName}\n" },
-                { "branch", x => $"Created new branch \"{x.Ref}\" in {x.RepoName}\n" },
+                { "branch", x => $"Created new branch \"{x.BranchName}\" in {x.RepoName}\n" },
             };
         }
 
@@ -22,14 +22,14 @@ namespace Main.Services.Formatters
 
             if (
                 _subFormatters.TryGetValue(
-                    createEvent.RefType,
+                    createEvent.SubType,
                     out Func<BaseCreateEvent, string> formatter
                 )
             )
             {
                 return formatter(createEvent);
             }
-            return $"Unknown CreateEvent type: {createEvent.RefType}";
+            return $"Unknown CreateEvent type: {createEvent.SubType}";
         }
     }
 }
