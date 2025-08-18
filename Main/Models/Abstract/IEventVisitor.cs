@@ -8,5 +8,6 @@ namespace Main.Models.Abstract
         string Visit(CreateBranchEvent createBranchEvent);
         string Visit(CreateRepositoryEvent createRepositoryEvent);
         string Visit(IssueCommentEvent issueCommentEvent);
+        string Visit(PullRequestCommentEvent pullRequestCommentEvent);
     }
 }

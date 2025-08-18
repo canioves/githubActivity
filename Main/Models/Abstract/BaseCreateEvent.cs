@@ -6,7 +6,7 @@ namespace Main.Models.Abstract
     {
         public string Type => "CreateEvent";
         public string BranchName { get; set; }
-        public string SubType { get; set; }
+        public string SubType { get; }
         public string RepoName { get; set; }
         public List<Commit> Commits { get; set; }
 

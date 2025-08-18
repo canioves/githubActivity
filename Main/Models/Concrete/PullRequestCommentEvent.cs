@@ -1,12 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Main.Models.Abstract;
 
 namespace Main.Models.Concrete
 {
-    public class PullRequestCommentEvent
+    public class PullRequestCommentEvent : BaseIssueCommentEvent
     {
-        
+        public override string SubType => "PullRequestCommentEvent";
+        public string PullRequestTitle { get; set; }
+        public string PullRequestBody { get; set; }
+        public string PullRequestState { get; set; }
+
+        public override string Accept(IEventVisitor visitor) => visitor.Visit(this);
     }
 }

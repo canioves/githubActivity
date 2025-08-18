@@ -20,5 +20,10 @@ namespace Main.Services.Formatters
         {
             return $"Issue \"{issueCommentEvent.IssueTitle}\" was {issueCommentEvent.ActionType}.\nBody: {issueCommentEvent.IssueBody}\nCurrent state - {issueCommentEvent.IssueState}";
         }
+
+        public string Visit(PullRequestCommentEvent pullRequestCommentEvent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

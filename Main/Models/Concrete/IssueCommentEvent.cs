@@ -2,15 +2,13 @@ using Main.Models.Abstract;
 
 namespace Main.Models.Concrete
 {
-    public class IssueCommentEvent : IEvent
+    public class IssueCommentEvent : BaseIssueCommentEvent
     {
-        public string Type => "IssueCommentEvent";
-        public string ActionType { get; set; }
-        public string RepoName { get; set; }
+        public override string SubType => "IssueCommentEvent";
         public string IssueTitle { get; set; }
         public string IssueBody { get; set; }
         public string IssueState { get; set; }
 
-        public string Accept(IEventVisitor visitor) => visitor.Visit(this);
+        public override string Accept(IEventVisitor visitor) => visitor.Visit(this);
     }
 }
