@@ -4,7 +4,7 @@ namespace Main.Models.Concrete
 {
     public class PullRequestCommentEvent : BaseIssueCommentEvent
     {
-        public override string SubType => "PullRequestCommentEvent";
+        public override bool IsPullRequest => true;
         public string PullRequestTitle { get; set; }
         public string PullRequestBody { get; set; }
         public string PullRequestState { get; set; }
