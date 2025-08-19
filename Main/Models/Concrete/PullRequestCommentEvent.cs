@@ -8,6 +8,7 @@ namespace Main.Models.Concrete
         public string PullRequestTitle { get; set; }
         public string PullRequestBody { get; set; }
         public string PullRequestState { get; set; }
+        public string PullRequestLastBody { get; set; }
 
         public override string Accept(IEventVisitor visitor) => visitor.Visit(this);
     }

@@ -14,6 +14,8 @@ namespace Main.Services.Factories
                 {
                     ActionType = dto.Payload.Action,
                     PullRequestBody = dto.Payload.Issue.Body,
+                    PullRequestLastBody =
+                        dto.Payload.Action == "edited" ? dto.Payload.Issue.Changes.Body.From : "",
                     PullRequestState = dto.Payload.Issue.State,
                     PullRequestTitle = dto.Payload.Issue.Title,
                     RepoName = dto.Repo.Name,
@@ -25,6 +27,8 @@ namespace Main.Services.Factories
                 {
                     ActionType = dto.Payload.Action,
                     IssueBody = dto.Payload.Issue.Body,
+                    IssueLastBody =
+                        dto.Payload.Action == "edited" ? dto.Payload.Issue.Changes.Body.From : "",
                     IssueState = dto.Payload.Issue.State,
                     IssueTitle = dto.Payload.Issue.Title,
                     RepoName = dto.Repo.Name,

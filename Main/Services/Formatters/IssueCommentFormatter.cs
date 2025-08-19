@@ -1,5 +1,6 @@
 using Main.Models;
 using Main.Models.Abstract;
+using Main.Models.Concrete;
 
 namespace Main.Services.Formatters
 {
@@ -9,9 +10,24 @@ namespace Main.Services.Formatters
         {
             BaseIssueCommentEvent issueCommentEvent = evnt as BaseIssueCommentEvent;
 
-            return issueCommentEvent.SubType switch
+            string target = issueCommentEvent.IsPullRequest ? "PR" : "issue";
+            string action = issueCommentEvent.ActionType;
+
+            return issueCommentEvent switch
             {
-                "IssueCommentEvent" => $"",
+                IssueCommentEvent issue when action == "created" =>
+                    $"New comment on issue \"{issue.IssueTitle}\": {issue.IssueBody}.",
+                IssueCommentEvent issue when action == "edited" =>
+                    $"Edited comment on issue \"{issue.IssueTitle}\": {issue.IssueBody}.\nEdited: {issue.IssueLastBody}.",
+                IssueCommentEvent issue when action == "deleted" =>
+                    $"Deleted comment on issue \"{issue.IssueTitle}\".",
+                PullRequestCommentEvent pr when action == "created" =>
+                    $"New comment on PR \"{pr.PullRequestTitle}\": {pr.PullRequestBody}.",
+                PullRequestCommentEvent pr when action == "edited" =>
+                    $"Edited comment on PR \"{pr.PullRequestTitle}\": {pr.PullRequestBody}.\nEdited: {pr.PullRequestLastBody}.",
+                PullRequestCommentEvent pr when action == "deleted" =>
+                    $"Deleted comment on PR \"{pr.PullRequestTitle}\".",
+                _ => throw new ArgumentException($"Unknown type of action: {action}"),
             };
         }
     }
